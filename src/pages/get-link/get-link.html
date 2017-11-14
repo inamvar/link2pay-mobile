@@ -1,0 +1,53 @@
+<ion-header>
+    <ion-navbar>
+      <button ion-button menuToggle icon-only>
+        <ion-icon name='menu'></ion-icon>
+      </button>
+      <ion-title>
+       دریافت لینک جدید
+      </ion-title>
+    </ion-navbar>
+  </ion-header>
+  <ion-content padding>
+  <form #loginForm="ngForm" (ngSubmit)="getLink()" autocomplete="off">
+      <ion-row>
+        <ion-col>
+          <ion-list inset>
+            <ion-item>
+                <ion-label floating>مبلغ (ریال)</ion-label>
+              <ion-input name="amount" id="loginField" type="number" required [(ngModel)]="amount" [disabled]="waiting"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label floating>نام پرداخت کننده</ion-label>
+              <ion-input name="payer_name" id="payer_name" type="text" required [(ngModel)]="payer_name" [disabled]="waiting"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label floating>موبایل پرداخت کننده</ion-label>
+                <ion-input  name="payer_mobile" id="payer_mobile" type="text" required [(ngModel)]="payer_mobile" [disabled]="waiting"></ion-input>
+              </ion-item>
+          </ion-list>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <div *ngIf="error" class="alert alert-danger">{{error}}</div>
+          <button ion-button class="submit-btn" full type="submit" [disabled]="!loginForm.form.valid || waiting">دریافت لینک
+          </button>
+        </ion-col>
+      </ion-row>
+    </form>
+    <div>
+
+        <h4><a  [href]="link" ng-show="link.length > 0">{{link}}</a></h4>
+        <ion-fab right bottom>
+            <button ion-fab color="danger"><ion-icon name="arrow-dropright"></ion-icon></button>
+            <ion-fab-list side="right">
+              <button ion-fab (tap)="onSms()"><ion-icon ios="ios-text" md="md-text"></ion-icon></button>
+              <button ion-fab (tap)="onWhatsApp()"><ion-icon ios="logo-whatsapp" md="logo-whatsapp"></ion-icon></button>
+              <button ion-fab  (tap)="onTelegram()">  <ion-icon ios="ios-send" md="md-send"></ion-icon></button>
+            </ion-fab-list>
+          </ion-fab>
+
+    </div>
+  
+ </ion-content>

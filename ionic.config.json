@@ -1,0 +1,8 @@
+{
+  "name": "link2pay-mobile",
+  "app_id": "",
+  "type": "ionic-angular",
+  "integrations": {
+    "cordova": {}
+  }
+}

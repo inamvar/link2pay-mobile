@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle icon-only>
+      <ion-icon name='menu'></ion-icon>
+    </button>
+    <ion-title>
+      لینک ها
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding>
+  <ion-list>
+    <ion-item *ngFor="let link of links">
+        <h2 >{{link.amount | number }} ریال</h2>
+        
+        <p>
+          <span>{{link.payer_name}}</span>
+          <span>{{link.payer_mobile}}</span>
+        </p>
+        
+        <p>
+          <small>{{link.date}}</small>
+          <small> {{link.status}}</small>
+        </p>
+     
+    </ion-item>
+  </ion-list>
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>

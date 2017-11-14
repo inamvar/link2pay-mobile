@@ -1,0 +1,37 @@
+<ion-menu [content]="content">
+    <ion-header>
+        <ion-toolbar>
+            <ion-title>گزینه ها</ion-title>
+        </ion-toolbar>
+    </ion-header>
+    <ion-content>
+
+
+        <ion-list>
+
+            <ion-item>
+                <h2>
+                    <span>{{ ' ' }}</span>
+                    <ion-icon name="contact"></ion-icon> {{display_name}}</h2>
+            </ion-item>
+            <button ion-item (click)="home()">
+                <ion-icon ios="ios-home" md="md-home"></ion-icon>
+                خانه
+            </button>
+            <button ion-item (click)="links()">
+                <ion-icon ios="ios-link" md="md-link"></ion-icon>
+               لینک ها
+            </button>
+            <button ion-item (click)="terminals()">
+                <ion-icon ios="ios-list" md="md-list"></ion-icon>
+                درگاه ها
+            </button>
+            <button ion-item (click)="logout()">
+                <ion-icon ios="ios-log-out" md="md-log-out"></ion-icon>
+                خروج
+            </button>
+        </ion-list>
+    </ion-content>
+</ion-menu>
+
+<ion-nav id="nav" #content [root]="rootPage"></ion-nav>
