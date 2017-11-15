@@ -36,9 +36,9 @@
         </ion-col>
       </ion-row>
     </form>
-    <div>
+    <div ng-show="link.length > 0">
 
-        <h4><a  [href]="link" ng-show="link.length > 0">{{link}}</a></h4>
+        <input   type="text" value="{{link}}" >
         <ion-fab right bottom>
             <button ion-fab color="danger"><ion-icon name="arrow-dropright"></ion-icon></button>
             <ion-fab-list side="right">
