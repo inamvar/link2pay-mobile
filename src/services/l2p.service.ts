@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { Http, Headers } from "@angular/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import 'rxjs';
 
 @Injectable()
@@ -8,23 +8,22 @@ export class L2pService {
     private host: string = 'http://l2p.ir/';
     public loading: boolean = false;
 
-    constructor(private http: Http) {
+    constructor(private http: HttpClient) {
 
     }
 
 
     login(username, password): Promise<any> {
-        const headers = new Headers(
-            { 'Content-Type': 'application/json' }
-        );
-        const data : any = { username: username, password: password };
+        const headers = {
+            'Content-Type': 'application/json'
+        };
+        const data: any = { username: username, password: password };
         const url: string = this.host + 'auth/gettoken';
         this.loading = true;
         console.log(data);
         console.log(headers);
-        return this.http.post(url, JSON.stringify(data), { headers: headers }).toPromise()
-            .then(res => res.json() as any)
-            .then(result => {
+        return this.http.post(url, JSON.stringify(data), { headers: new HttpHeaders(headers) }).toPromise()
+            .then((result: any) => {
                 console.log(result);
                 if (result && result.success == true) {
                     localStorage.setItem('x-access-token', result.token);
@@ -37,27 +36,25 @@ export class L2pService {
     }
 
     getTerminals(): Promise<any> {
-        const headers = new Headers(
-            {
-                'Content-Type': 'application/json; charset=UTF-8',
-                'x-access-token': localStorage.getItem('x-access-token')
-            }
-        );
+        const headers = {
+            'Content-Type': 'application/json; charset=UTF-8',
+            'x-access-token': localStorage.getItem('x-access-token')
+        };
+
         const url: string = this.host + 'api/terminals';
         this.loading = true;
-        return this.http.get(url, { headers: headers }).toPromise()
-            .then(res => res.json() as any)
+        return this.http.get(url, { headers:  new HttpHeaders(headers)  }).toPromise()
             .then(this.done.bind(this))
             .catch(this.handleError.bind(this))
     }
 
     createLink(amount, payer_name, payer_mobile, terminal_uuid): Promise<any> {
-        const headers = new Headers(
+        const headers =
             {
                 'Content-Type': 'application/json; charset=UTF-8',
                 'x-access-token': localStorage.getItem('x-access-token')
-            }
-        );
+            };
+
         const url: string = this.host + 'api/links';
 
         const data =
@@ -68,26 +65,24 @@ export class L2pService {
                 terminal_uuid: terminal_uuid
             };
         this.loading = true;
-        return this.http.post(url, JSON.stringify(data), { headers: headers }).toPromise()
-            .then(res => res.json() as any)
+        return this.http.post(url, JSON.stringify(data), { headers:  new HttpHeaders(headers)  }).toPromise()
             .then(this.done.bind(this))
             .catch(this.handleError.bind(this));
     }
 
     links(page?: number, limit?: number): Promise<any> {
-        const headers = new Headers(
+        const headers =
             {
                 'Content-Type': 'application/json; charset=UTF-8',
                 'x-access-token': localStorage.getItem('x-access-token')
-            }
-        );
+            };
+
 
         let url = this.host + 'api/links';
-        if(page > 0 && limit > 0){
-            url += '?page='+page + '&limit='+ limit;
+        if (page > 0 && limit > 0) {
+            url += '?page=' + page + '&limit=' + limit;
         }
-        return this.http.get(url, { headers: headers }).toPromise()
-            .then(res => res.json() as any)
+        return this.http.get(url, { headers:  new HttpHeaders(headers)  }).toPromise()
             .then(this.done.bind(this))
             .catch(this.handleError.bind(this));
 
