@@ -5,7 +5,7 @@ import 'rxjs';
 @Injectable()
 export class L2pService {
 
-    private host: string = '//l2p.ir/';
+    private host: string = 'http://l2p.ir/';
     public loading: boolean = false;
 
     constructor(private http: Http) {
@@ -17,7 +17,7 @@ export class L2pService {
         const headers = new Headers(
             { 'Content-Type': 'application/json' }
         );
-        const data = { username: username, password: password };
+        const data : any = { username: username, password: password };
         const url: string = this.host + 'auth/gettoken';
         this.loading = true;
         console.log(data);
