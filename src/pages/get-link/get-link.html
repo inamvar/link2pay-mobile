@@ -36,9 +36,12 @@
         </ion-col>
       </ion-row>
     </form>
-    <div ng-show="link.length > 0">
+    <div *ngIf="link.length > 0">
 
-        <input   type="text" value="{{link}}" >
+      <ion-textarea name="message" rows=5 id="message" type="text" required [(ngModel)]="message" ></ion-textarea>
+      <pre dir="ltr">
+          {{ result}}
+      </pre>
         <ion-fab right bottom>
             <button ion-fab color="danger"><ion-icon name="arrow-dropright"></ion-icon></button>
             <ion-fab-list side="right">

@@ -14,6 +14,7 @@ export class GetLinkPage {
   payer_name: string = '';
   payer_mobile: string = '';
   link: string = '';
+  result : string;
   message: string = '';
   loader: any;
   constructor(
@@ -34,6 +35,7 @@ export class GetLinkPage {
           this.l2pService.createLink(this.amount, this.payer_name, this.payer_mobile, terminal.uuid)
             .then(result => {
               if (result.success == true) {
+                this.result = JSON.stringify(result, null, "\t");
                 this.link = result.shortLink;
                 this.message = ' یک صورت حساب به مبلغ '
                   + this.amount
